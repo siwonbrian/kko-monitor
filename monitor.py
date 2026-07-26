@@ -1,9 +1,11 @@
 """
 카카오 선물하기 상품 재고/가격 모니터링 스크립트
 
-- 상품 전체 상태 (가격, 품절여부)
-- 옵션(타이틀)별 재고 상태
-두 가지를 확인해서, 이전 실행 결과와 달라진 점이 있으면 Discord로 알림을 보냅니다.
+감시 대상 두 가지:
+1. "택1" 상품(6415759) - 25종 타이틀 개별 재입고/품절 + 전체 가격
+2. "닌텐도" 검색 결과 중 게임타이틀(standardCategory.id==533) 전체 147개
+   - 가격 변동 감지
+   - 목록에서 사라짐(품절/판매중지 추정) 감지
 
 이전 상태는 state.json 파일에 저장되고, GitHub Actions가 실행될 때마다
 이 파일을 커밋해서 다음 실행 때 "이전 값"으로 비교합니다.
@@ -12,12 +14,16 @@
 import json
 import os
 import sys
+import urllib.parse
 import urllib.request
 
 PRODUCT_ID = 6415759
+SEARCH_QUERY = "닌텐도"
+GAME_TITLE_CATEGORY_ID = 533
 
 PRODUCT_URL = f"https://gift.kakao.com/a/product-detail/v3/products/{PRODUCT_ID}"
 OPTIONS_URL = f"https://gift.kakao.com/a/product-detail/v1/products/{PRODUCT_ID}/options"
+SEARCH_URL = "https://gift.kakao.com/a/gift-explorer/v1/search/products"
 
 STATE_FILE = "state.json"
 
@@ -61,7 +67,11 @@ def send_discord_message(webhook_url: str, content: str) -> None:
         resp.read()
 
 
-def build_current_state() -> dict:
+# ---------------------------------------------------------------------------
+# 1. "택1" 상품 - 개별 타이틀 재입고/품절 감시
+# ---------------------------------------------------------------------------
+
+def build_pick_one_state() -> dict:
     product = fetch_json(PRODUCT_URL)
     options = fetch_json(OPTIONS_URL)
 
@@ -83,21 +93,20 @@ def build_current_state() -> dict:
     }
 
 
-def diff_states(old: dict, new: dict) -> list[str]:
+def diff_pick_one(old: dict, new: dict) -> list[str]:
     messages = []
-
     if not old:
-        return messages  # 첫 실행이면 비교할 대상이 없으니 알림 없이 상태만 저장
+        return messages
 
     if old.get("status") != new.get("status"):
-        messages.append(f"📦 상품 상태 변경: {old.get('status')} → {new.get('status')}")
+        messages.append(f"📦 [택1상품] 상태 변경: {old.get('status')} → {new.get('status')}")
 
     if old.get("soldOut") != new.get("soldOut"):
-        messages.append(f"🔔 전체 품절 상태 변경: {old.get('soldOut')} → {new.get('soldOut')}")
+        messages.append(f"🔔 [택1상품] 전체 품절 상태 변경: {old.get('soldOut')} → {new.get('soldOut')}")
 
     if old.get("sellingPrice") != new.get("sellingPrice"):
         messages.append(
-            f"💰 가격 변동: {old.get('sellingPrice'):,}원 → {new.get('sellingPrice'):,}원"
+            f"💰 [택1상품] 가격 변동: {old.get('sellingPrice'):,}원 → {new.get('sellingPrice'):,}원"
         )
 
     old_options = old.get("options", {})
@@ -106,7 +115,7 @@ def diff_states(old: dict, new: dict) -> list[str]:
     for option_id, new_info in new_options.items():
         old_info = old_options.get(option_id)
         if old_info is None:
-            continue  # 새로 생긴 옵션은 재입고 알림 대상 아님 (별도 처리 원하면 여기 추가)
+            continue
 
         old_stock = old_info["stock"]
         new_stock = new_info["stock"]
@@ -119,26 +128,84 @@ def diff_states(old: dict, new: dict) -> list[str]:
     return messages
 
 
+# ---------------------------------------------------------------------------
+# 2. "닌텐도" 검색 결과 - 게임타이틀 카테고리 전체 가격 감시
+# ---------------------------------------------------------------------------
+
+def build_game_titles_state() -> dict:
+    """size=600 한 번의 호출로 전체 검색 결과를 받아서, 게임타이틀 카테고리만 필터링."""
+    params = urllib.parse.urlencode({"query": SEARCH_QUERY, "page": 0, "size": 600})
+    data = fetch_json(f"{SEARCH_URL}?{params}")
+    contents = data.get("products", {}).get("contents", [])
+
+    titles = {}
+    for p in contents:
+        category = p.get("standardCategory", {})
+        if category.get("id") != GAME_TITLE_CATEGORY_ID:
+            continue
+        titles[str(p["id"])] = {
+            "name": p.get("name"),
+            "sellingPrice": p.get("price", {}).get("sellingPrice"),
+        }
+
+    return titles
+
+
+def diff_game_titles(old: dict, new: dict) -> list[str]:
+    messages = []
+    if not old:
+        return messages  # 첫 실행이면 비교 대상 없음
+
+    # 가격 변동 감지
+    for product_id, new_info in new.items():
+        old_info = old.get(product_id)
+        if old_info is None:
+            continue  # 새로 목록에 추가된 상품은 가격 비교 대상 아님
+        if old_info["sellingPrice"] != new_info["sellingPrice"]:
+            messages.append(
+                f"💰 [{new_info['name']}] 가격 변동: "
+                f"{old_info['sellingPrice']:,}원 → {new_info['sellingPrice']:,}원"
+            )
+
+    # 목록에서 사라짐 (품절/판매중지 추정) 감지
+    for product_id, old_info in old.items():
+        if product_id not in new:
+            messages.append(f"❌ 품절/판매중지 추정: 「{old_info['name']}」 (검색 결과에서 사라짐)")
+
+    return messages
+
+
+# ---------------------------------------------------------------------------
+# 메인
+# ---------------------------------------------------------------------------
+
 def main():
     webhook_url = os.environ.get("DISCORD_WEBHOOK_URL")
     if not webhook_url:
         print("경고: DISCORD_WEBHOOK_URL 환경변수가 설정되지 않았습니다.", file=sys.stderr)
 
     old_state = load_previous_state()
-    new_state = build_current_state()
 
-    changes = diff_states(old_state, new_state)
+    old_pick_one = old_state.get("pick_one", {})
+    old_game_titles = old_state.get("game_titles", {})
 
-    if changes:
+    new_pick_one = build_pick_one_state()
+    new_game_titles = build_game_titles_state()
+
+    messages = []
+    messages.extend(diff_pick_one(old_pick_one, new_pick_one))
+    messages.extend(diff_game_titles(old_game_titles, new_game_titles))
+
+    if messages:
         product_link = f"https://gift.kakao.com/product/{PRODUCT_ID}"
-        content = "**카카오 선물하기 상품 변경 감지**\n" + "\n".join(changes) + f"\n{product_link}"
+        content = "**카카오 선물하기 상품 변경 감지**\n" + "\n".join(messages) + f"\n{product_link}"
         print(content)
         if webhook_url:
             send_discord_message(webhook_url, content)
     else:
         print("변경 사항 없음.")
 
-    save_state(new_state)
+    save_state({"pick_one": new_pick_one, "game_titles": new_game_titles})
 
 
 if __name__ == "__main__":
