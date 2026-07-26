@@ -32,3 +32,5 @@ jobs:
           git add state.json
           git diff --staged --quiet || git commit -m "상태 업데이트"
           git push
+
+# resync
