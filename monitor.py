@@ -63,8 +63,13 @@ def send_discord_message(webhook_url: str, content: str) -> None:
         headers={"Content-Type": "application/json"},
         method="POST",
     )
-    with urllib.request.urlopen(req, timeout=15) as resp:
-        resp.read()
+    try:
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            resp.read()
+    except urllib.error.HTTPError as e:
+        # 디스코드 전송이 실패해도 전체 스크립트가 죽지 않도록 함
+        # (웹훅 URL이 잘못됐거나 만료된 경우 등)
+        print(f"경고: 디스코드 전송 실패 ({e.code} {e.reason}). 상태 저장은 계속 진행합니다.", file=sys.stderr)
 
 
 # ---------------------------------------------------------------------------
@@ -151,10 +156,45 @@ def build_game_titles_state() -> dict:
     return titles
 
 
-def diff_game_titles(old: dict, new: dict) -> list[str]:
-    messages = []
+# 이 비율보다 목록이 급격히 줄어들면, 진짜 품절이 아니라 API 응답 이상으로 간주한다.
+# (예: 카카오 서버가 자동화된 요청을 감지해 size=600을 무시하고 일부만 돌려준 경우)
+DROP_SUSPICION_THRESHOLD = 0.5
+DROP_SUSPICION_MIN_OLD_COUNT = 20
+
+
+def diff_game_titles(old: dict, new: dict):
+    """
+    반환값: (알림 메시지 목록, 다음 실행을 위해 저장할 game_titles 상태)
+    """
     if not old:
-        return messages  # 첫 실행이면 비교 대상 없음
+        return [], new  # 첫 실행이면 비교 대상 없이 그대로 저장
+
+    old_count = len(old)
+    new_count = len(new)
+
+    suspicious_drop = (
+        old_count >= DROP_SUSPICION_MIN_OLD_COUNT
+        and new_count < old_count * DROP_SUSPICION_THRESHOLD
+    )
+
+    if suspicious_drop:
+        # 급감 상황: "사라짐 = 품절" 판정을 걸지 않는다.
+        # 대신 겹치는 상품에 대해서만 가격 변동은 확인하고,
+        # 다음 실행이 다시 온전한 이전 데이터와 비교할 수 있도록 old 상태를 그대로 유지해서 저장한다.
+        messages = [
+            f"⚠️ 게임타이틀 목록이 이전 {old_count}개 → 이번 {new_count}개로 급감했습니다. "
+            f"카카오 API 응답 이상으로 보여 이번 회차는 품절 판정을 건너뜁니다."
+        ]
+        for product_id, new_info in new.items():
+            old_info = old.get(product_id)
+            if old_info and old_info["sellingPrice"] != new_info["sellingPrice"]:
+                messages.append(
+                    f"💰 [{new_info['name']}] 가격 변동: "
+                    f"{old_info['sellingPrice']:,}원 → {new_info['sellingPrice']:,}원"
+                )
+        return messages, old  # 다음 비교를 위해 이전(온전한) 데이터를 그대로 유지
+
+    messages = []
 
     # 가격 변동 감지
     for product_id, new_info in new.items():
@@ -172,7 +212,7 @@ def diff_game_titles(old: dict, new: dict) -> list[str]:
         if product_id not in new:
             messages.append(f"❌ 품절/판매중지 추정: 「{old_info['name']}」 (검색 결과에서 사라짐)")
 
-    return messages
+    return messages, new
 
 
 # ---------------------------------------------------------------------------
@@ -190,11 +230,13 @@ def main():
     old_game_titles = old_state.get("game_titles", {})
 
     new_pick_one = build_pick_one_state()
-    new_game_titles = build_game_titles_state()
+    new_game_titles_raw = build_game_titles_state()
+
+    game_title_messages, game_titles_to_save = diff_game_titles(old_game_titles, new_game_titles_raw)
 
     messages = []
     messages.extend(diff_pick_one(old_pick_one, new_pick_one))
-    messages.extend(diff_game_titles(old_game_titles, new_game_titles))
+    messages.extend(game_title_messages)
 
     if messages:
         product_link = f"https://gift.kakao.com/product/{PRODUCT_ID}"
@@ -205,7 +247,7 @@ def main():
     else:
         print("변경 사항 없음.")
 
-    save_state({"pick_one": new_pick_one, "game_titles": new_game_titles})
+    save_state({"pick_one": new_pick_one, "game_titles": game_titles_to_save})
 
 
 if __name__ == "__main__":
