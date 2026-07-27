@@ -13,12 +13,12 @@
       },
       "383918562": {
         "name": "SWITCH 슈퍼 마리오 3D 월드+퓨리 월드",
-        "stock": 36,
+        "stock": 35,
         "unlimited": false
       },
       "383918563": {
         "name": "SWITCH 슈퍼 마리오 오디세이",
-        "stock": 80,
+        "stock": 79,
         "unlimited": false
       },
       "383918565": {
@@ -38,7 +38,7 @@
       },
       "383918569": {
         "name": "SWITCH 별의 커비 디스커버리",
-        "stock": 86,
+        "stock": 85,
         "unlimited": false
       },
       "472721943": {
@@ -58,12 +58,12 @@
       },
       "472721946": {
         "name": "SWITCH 스플래툰3",
-        "stock": 37,
+        "stock": 34,
         "unlimited": false
       },
       "472721947": {
         "name": "SWITCH 포켓몬 레전드 아르세우스",
-        "stock": 32,
+        "stock": 29,
         "unlimited": false
       },
       "472721948": {
@@ -73,7 +73,7 @@
       },
       "472721952": {
         "name": "SWITCH 포켓몬스터바이올렛",
-        "stock": 71,
+        "stock": 70,
         "unlimited": false
       },
       "472721953": {
@@ -83,12 +83,12 @@
       },
       "472721954": {
         "name": "SWITCH 모여봐요 동물의 숲",
-        "stock": 291,
+        "stock": 290,
         "unlimited": false
       },
       "861611819": {
         "name": "SWITCH 슈퍼 마리오 파티 잼버리",
-        "stock": 275,
+        "stock": 273,
         "unlimited": false
       },
       "861611821": {
@@ -148,10 +148,6 @@
     "11990827": {
       "name": "닌텐도 스위치2 별의 커비 디스커버리+스타리 월드",
       "sellingPrice": 83800
-    },
-    "13754291": {
-      "name": "닌텐도 스위치2 P의 거짓 컴플리트 에디션(9/30 출고)",
-      "sellingPrice": 69800
     },
     "13073721": {
       "name": "닌텐도 스위치 포켓몬 레전드 Z-A 메가차원러시 + ZA게임가이드",
