@@ -18,7 +18,7 @@
       },
       "383918563": {
         "name": "SWITCH 슈퍼 마리오 오디세이",
-        "stock": 87,
+        "stock": 80,
         "unlimited": false
       },
       "383918565": {
@@ -33,12 +33,12 @@
       },
       "383918568": {
         "name": "SWITCH 별의 커비 Wii 디럭스",
-        "stock": 48,
+        "stock": 45,
         "unlimited": false
       },
       "383918569": {
         "name": "SWITCH 별의 커비 디스커버리",
-        "stock": 93,
+        "stock": 86,
         "unlimited": false
       },
       "472721943": {
@@ -53,57 +53,57 @@
       },
       "472721945": {
         "name": "SWITCH 슈퍼 마리오브라더스 원더",
-        "stock": 96,
+        "stock": 95,
         "unlimited": false
       },
       "472721946": {
         "name": "SWITCH 스플래툰3",
-        "stock": 39,
+        "stock": 37,
         "unlimited": false
       },
       "472721947": {
         "name": "SWITCH 포켓몬 레전드 아르세우스",
-        "stock": 39,
+        "stock": 32,
         "unlimited": false
       },
       "472721948": {
         "name": "SWITCH 루이지 맨션 3",
-        "stock": 28,
+        "stock": 25,
         "unlimited": false
       },
       "472721952": {
         "name": "SWITCH 포켓몬스터바이올렛",
-        "stock": 84,
+        "stock": 71,
         "unlimited": false
       },
       "472721953": {
         "name": "SWITCH 포켓몬스터 스칼렛",
-        "stock": 40,
+        "stock": 37,
         "unlimited": false
       },
       "472721954": {
         "name": "SWITCH 모여봐요 동물의 숲",
-        "stock": 296,
+        "stock": 291,
         "unlimited": false
       },
       "861611819": {
         "name": "SWITCH 슈퍼 마리오 파티 잼버리",
-        "stock": 282,
+        "stock": 275,
         "unlimited": false
       },
       "861611821": {
         "name": "SWITCH 포켓몬스터 소드",
-        "stock": 41,
+        "stock": 34,
         "unlimited": false
       },
       "861611822": {
         "name": "SWITCH 포켓몬스터 실드",
-        "stock": 28,
+        "stock": 27,
         "unlimited": false
       },
       "879304169": {
         "name": "SWITCH 피크민 4",
-        "stock": 50,
+        "stock": 48,
         "unlimited": false
       }
     }
@@ -264,10 +264,6 @@
     "12071269": {
       "name": "[NS 2] 닌텐도 스위치2 슈퍼 마리오 파티 잼버리 스위치 2 에디션+잼버리 TV",
       "sellingPrice": 84800
-    },
-    "7340844": {
-      "name": "닌텐도 스위치 피크민4 한글판 + 조이콘버튼커버 2개",
-      "sellingPrice": 64800
     },
     "12872045": {
       "name": "닌텐도 스위치 흉란 마계이즘",
