@@ -8,17 +8,17 @@
     "options": {
       "383918560": {
         "name": "SWITCH 마리오 카트 8 디럭스",
-        "stock": 187,
+        "stock": 183,
         "unlimited": false
       },
       "383918562": {
         "name": "SWITCH 슈퍼 마리오 3D 월드+퓨리 월드",
-        "stock": 33,
+        "stock": 30,
         "unlimited": false
       },
       "383918563": {
         "name": "SWITCH 슈퍼 마리오 오디세이",
-        "stock": 64,
+        "stock": 57,
         "unlimited": false
       },
       "383918565": {
@@ -28,22 +28,22 @@
       },
       "383918566": {
         "name": "SWITCH 슈퍼 스매시브라더스 얼티밋",
-        "stock": 47,
+        "stock": 45,
         "unlimited": false
       },
       "383918568": {
         "name": "SWITCH 별의 커비 Wii 디럭스",
-        "stock": 43,
+        "stock": 36,
         "unlimited": false
       },
       "383918569": {
         "name": "SWITCH 별의 커비 디스커버리",
-        "stock": 79,
+        "stock": 76,
         "unlimited": false
       },
       "472721943": {
         "name": "SWITCH 별의 커비 스타 얼라이즈",
-        "stock": 47,
+        "stock": 44,
         "unlimited": false
       },
       "472721944": {
@@ -53,7 +53,7 @@
       },
       "472721945": {
         "name": "SWITCH 슈퍼 마리오브라더스 원더",
-        "stock": 87,
+        "stock": 86,
         "unlimited": false
       },
       "472721946": {
@@ -63,47 +63,47 @@
       },
       "472721947": {
         "name": "SWITCH 포켓몬 레전드 아르세우스",
-        "stock": 23,
+        "stock": 18,
         "unlimited": false
       },
       "472721948": {
         "name": "SWITCH 루이지 맨션 3",
-        "stock": 20,
+        "stock": 18,
         "unlimited": false
       },
       "472721952": {
         "name": "SWITCH 포켓몬스터바이올렛",
-        "stock": 50,
+        "stock": 41,
         "unlimited": false
       },
       "472721953": {
         "name": "SWITCH 포켓몬스터 스칼렛",
-        "stock": 37,
+        "stock": 29,
         "unlimited": false
       },
       "472721954": {
         "name": "SWITCH 모여봐요 동물의 숲",
-        "stock": 273,
+        "stock": 269,
         "unlimited": false
       },
       "861611819": {
         "name": "SWITCH 슈퍼 마리오 파티 잼버리",
-        "stock": 233,
+        "stock": 221,
         "unlimited": false
       },
       "861611821": {
         "name": "SWITCH 포켓몬스터 소드",
-        "stock": 21,
+        "stock": 10,
         "unlimited": false
       },
       "861611822": {
         "name": "SWITCH 포켓몬스터 실드",
-        "stock": 23,
+        "stock": 22,
         "unlimited": false
       },
       "879304169": {
         "name": "SWITCH 피크민 4",
-        "stock": 47,
+        "stock": 46,
         "unlimited": false
       }
     }
@@ -292,10 +292,6 @@
     "4142803": {
       "name": "닌텐도 스위치 13기병방위권 + 조이콘버튼커버 2개",
       "sellingPrice": 49800
-    },
-    "3611744": {
-      "name": "SWITCH 슈퍼 마리오 오디세이",
-      "sellingPrice": 59800
     },
     "12757741": {
       "name": "닌텐도 스위치2 마리오 테니스 피버",
@@ -660,10 +656,6 @@
     "6344044": {
       "name": "FPS 콜오브듀티 S.C.A.R PS4 전용 버튼커버(택배비포함)",
       "sellingPrice": 8700
-    },
-    "13826866": {
-      "name": "닌텐도 스위치2 제노블레이드 크로니클스 디피니티브 에디션 Nintendo Switch 2 Edition(7/29 출고)",
-      "sellingPrice": 74800
     },
     "13252071": {
       "name": "[NS 2 전용] 닌텐도 스위치 2 령 제로 붉은 나비 리메이크",
