@@ -8,7 +8,7 @@
     "options": {
       "383918560": {
         "name": "SWITCH 마리오 카트 8 디럭스",
-        "stock": 164,
+        "stock": 163,
         "unlimited": false
       },
       "383918562": {
@@ -33,7 +33,7 @@
       },
       "383918568": {
         "name": "SWITCH 별의 커비 Wii 디럭스",
-        "stock": 28,
+        "stock": 26,
         "unlimited": false
       },
       "383918569": {
@@ -43,7 +43,7 @@
       },
       "472721943": {
         "name": "SWITCH 별의 커비 스타 얼라이즈",
-        "stock": 39,
+        "stock": 36,
         "unlimited": false
       },
       "472721944": {
@@ -78,17 +78,17 @@
       },
       "472721953": {
         "name": "SWITCH 포켓몬스터 스칼렛",
-        "stock": 9,
+        "stock": 4,
         "unlimited": false
       },
       "472721954": {
         "name": "SWITCH 모여봐요 동물의 숲",
-        "stock": 233,
+        "stock": 231,
         "unlimited": false
       },
       "861611819": {
         "name": "SWITCH 슈퍼 마리오 파티 잼버리",
-        "stock": 137,
+        "stock": 135,
         "unlimited": false
       },
       "861611821": {
@@ -248,10 +248,6 @@
     "13793210": {
       "name": "닌텐도 스위치2 디지몬 스토리 타임 스트레인저 초회판(플레이어블 카드 증정)",
       "sellingPrice": 72800
-    },
-    "12071269": {
-      "name": "[NS 2] 닌텐도 스위치2 슈퍼 마리오 파티 잼버리 스위치 2 에디션+잼버리 TV",
-      "sellingPrice": 84800
     },
     "12825238": {
       "name": "닌텐도 스위치 드래곤 퀘스트7 리이매진드 한글판",
