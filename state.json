@@ -8,12 +8,12 @@
     "options": {
       "383918560": {
         "name": "SWITCH 마리오 카트 8 디럭스",
-        "stock": 161,
+        "stock": 159,
         "unlimited": false
       },
       "383918562": {
         "name": "SWITCH 슈퍼 마리오 3D 월드+퓨리 월드",
-        "stock": 15,
+        "stock": 14,
         "unlimited": false
       },
       "383918563": {
@@ -28,7 +28,7 @@
       },
       "383918566": {
         "name": "SWITCH 슈퍼 스매시브라더스 얼티밋",
-        "stock": 38,
+        "stock": 37,
         "unlimited": false
       },
       "383918568": {
@@ -38,12 +38,12 @@
       },
       "383918569": {
         "name": "SWITCH 별의 커비 디스커버리",
-        "stock": 51,
+        "stock": 49,
         "unlimited": false
       },
       "472721943": {
         "name": "SWITCH 별의 커비 스타 얼라이즈",
-        "stock": 36,
+        "stock": 37,
         "unlimited": false
       },
       "472721944": {
@@ -53,12 +53,12 @@
       },
       "472721945": {
         "name": "SWITCH 슈퍼 마리오브라더스 원더",
-        "stock": 68,
+        "stock": 67,
         "unlimited": false
       },
       "472721946": {
         "name": "SWITCH 스플래툰3",
-        "stock": 22,
+        "stock": 21,
         "unlimited": false
       },
       "472721947": {
@@ -83,12 +83,12 @@
       },
       "472721954": {
         "name": "SWITCH 모여봐요 동물의 숲",
-        "stock": 226,
+        "stock": 223,
         "unlimited": false
       },
       "861611819": {
         "name": "SWITCH 슈퍼 마리오 파티 잼버리",
-        "stock": 131,
+        "stock": 126,
         "unlimited": false
       },
       "861611821": {
@@ -98,7 +98,7 @@
       },
       "861611822": {
         "name": "SWITCH 포켓몬스터 실드",
-        "stock": 11,
+        "stock": 9,
         "unlimited": false
       },
       "879304169": {
@@ -492,10 +492,6 @@
     "13898210": {
       "name": "닌텐도 스위치2 시노비 복수의 참격 (PET패널 증정, 9/23 출고)",
       "sellingPrice": 30800
-    },
-    "3612197": {
-      "name": "SWITCH 젤다의 전설 브레스 오브 더 와일드",
-      "sellingPrice": 64800
     },
     "11406883": {
       "name": "닌텐도 스위치 동방 스펠 카니발 + 조이콘버튼커버 2개",
