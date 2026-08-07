@@ -8,7 +8,7 @@
     "options": {
       "383918560": {
         "name": "SWITCH 마리오 카트 8 디럭스",
-        "stock": 140,
+        "stock": 141,
         "unlimited": false
       },
       "383918562": {
@@ -28,17 +28,17 @@
       },
       "383918566": {
         "name": "SWITCH 슈퍼 스매시브라더스 얼티밋",
-        "stock": 30,
+        "stock": 29,
         "unlimited": false
       },
       "383918568": {
         "name": "SWITCH 별의 커비 Wii 디럭스",
-        "stock": 19,
+        "stock": 18,
         "unlimited": false
       },
       "383918569": {
         "name": "SWITCH 별의 커비 디스커버리",
-        "stock": 38,
+        "stock": 37,
         "unlimited": false
       },
       "472721943": {
@@ -83,12 +83,12 @@
       },
       "472721954": {
         "name": "SWITCH 모여봐요 동물의 숲",
-        "stock": 202,
+        "stock": 201,
         "unlimited": false
       },
       "861611819": {
         "name": "SWITCH 슈퍼 마리오 파티 잼버리",
-        "stock": 78,
+        "stock": 77,
         "unlimited": false
       },
       "861611821": {
@@ -392,6 +392,14 @@
     "11769184": {
       "name": "[NS 2] 닌텐도 스위치2 젤다의 전설 티어스 오브 더 킹덤 스위치 2 에디션",
       "sellingPrice": 79800
+    },
+    "14073825": {
+      "name": "닌텐도 스위치 데이브 더 다이버 애니버서리 에디션",
+      "sellingPrice": 49000
+    },
+    "14074419": {
+      "name": "닌텐도 스위치 열혈서유기 천축난투편",
+      "sellingPrice": 44800
     },
     "14030711": {
       "name": "닌텐도 스위치 쿠산: 늑대들의 도시",
